@@ -9,13 +9,17 @@ routes.get('/', (request, response) => {
 });
 
 routes.post('/devs', async(request, response) => {
-    const { github_username, techs } = request.body;
+    const { github_username, techs, latitude, longitude } = request.body;
     const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
     const { name = login , avatar_url, bio} = apiResponse.data;
 
     const techsArray = techs.split(',').map(tech => tech.trim());
+    const location = {
+        type: 'Point',
+        coordinates: [longitude, latitude],
+    };
 
-    console.log(github_username, name, bio, techs, avatar_url);
+    // console.log(github_username, name, bio, techs, avatar_url);
 
     const dev = await Dev.create({
         github_username,
@@ -23,6 +27,7 @@ routes.post('/devs', async(request, response) => {
         avatar_url,
         bio,
         techs: techsArray,
+        location,
     });
 
     return response.json(dev);
