@@ -40,7 +40,22 @@ module.exports = {
     },
 
     async update(request, response) {
-        
+        const { github_username } = request.query;
+        const { bio, techs } = request.body;
+        const techsArray = parseStringAsArray(techs);
+        // console.log(bio, techsArray);
+
+        const dev = await Dev.updateOne({
+            github_username,
+            $set: {
+                // "bio": `${bio}`,
+                // "techs": `${techsArray}`,
+                bio,
+                techs: techsArray,
+            }
+        });
+
+        return response.json(dev);
     },
 
     async destroy(request, response) {
