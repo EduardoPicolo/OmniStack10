@@ -6,7 +6,7 @@ module.exports = {
     async index(request, response){
         const devs = await Dev.find();
 
-        return response.json(devs);
+        return response.json({ devs });
     },
 
     async store(request, response) {
@@ -37,5 +37,24 @@ module.exports = {
             });
         }
         return response.json(dev);
-    }
+    },
+
+    async update(request, response) {
+        
+    },
+
+    async destroy(request, response) {
+        const { github_username } = request.query;
+
+        // const dev = await Dev.findOne({
+        //     github_username,
+        // });
+
+        const dev = await Dev.findOneAndDelete({
+            github_username,
+        });
+
+        return response.json({ dev });
+    },
+
 };
