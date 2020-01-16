@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from './services/api';
 
 import './global.css';
 import './App.css';
@@ -6,7 +7,7 @@ import './Sidebar.css';
 import './Main.css';
 
 function App() {
-  const [github_usernamme, setGithub_username] = useState('');
+  const [github_username, setGithub_username] = useState('');
   const [techs, setTechs] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
@@ -28,21 +29,36 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    
+  }, []);
+
   async function handleSubmit(e) {
+    e.preventDefault();
+
+    const response = await api.post('/devs', {
+      github_username,
+      techs,
+      latitude,
+      longitude,
+    });
+
+    setGithub_username('');
+    setTechs('');
   }
 
   return (
     <div id="app">
       <aside>
         <strong>Cadastrar</strong>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="input-block">
             <label htmlFor="github_username">Usúario do Github</label>
             <input 
               name="github_username" 
               id="github_username" 
               required
-              values={github_usernamme}
+              values={github_username}
               onChange={e => setGithub_username(e.target.value)}
             />
           </div>
@@ -100,17 +116,6 @@ function App() {
             </header>
             <p>BiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografia</p>
             <a href="https://github.com">Acessar perfil no Github</a>  
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/49292747?s=460&v=4" alt="Avatar" />
-              <div className="user-info">
-                <strong>Username</strong>
-                <span>Tecnologias</span>
-              </div>
-            </header>
-            <p>BiografiaBiografiaBiografiaBiografiaBiografia</p>
-            <a href="https://github.com">Acessar perfil no Github</a>
           </li>
         </ul>
       </main>
