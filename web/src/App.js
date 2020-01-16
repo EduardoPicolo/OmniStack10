@@ -6,7 +6,11 @@ import './App.css';
 import './Sidebar.css';
 import './Main.css';
 
+import DevItem from './components/DevItem';
+
 function App() {
+  const [devs, setDevs] = useState([]);
+
   const [github_username, setGithub_username] = useState('');
   const [techs, setTechs] = useState('');
   const [latitude, setLatitude] = useState('');
@@ -30,7 +34,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    
+    async function loadDevs(){
+      const response = await api.get('/devs');
+      setDevs(response.data);
+    }
+
+    loadDevs();
   }, []);
 
   async function handleSubmit(e) {
@@ -45,6 +54,8 @@ function App() {
 
     setGithub_username('');
     setTechs('');
+
+    setDevs([...devs, response.data]);
   }
 
   return (
@@ -105,19 +116,13 @@ function App() {
       </aside>
 
       <main>
+        
         <ul>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars1.githubusercontent.com/u/49292747?s=460&v=4" alt="Avatar"/>
-              <div className="user-info">
-                <strong>Username</strong>
-                <span>Tecnologias</span>
-              </div>
-            </header>
-            <p>BiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografiaBiografia</p>
-            <a href="https://github.com">Acessar perfil no Github</a>  
-          </li>
+          {devs.map(dev => (
+            <DevItem key={dev._id} dev={dev}></DevItem>
+          ))}
         </ul>
+
       </main>
     </div>
   );
