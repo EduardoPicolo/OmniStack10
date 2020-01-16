@@ -21,23 +21,27 @@ function App() {
     loadDevs();
   }, []);
 
-  async function handleSubmit(data) {
+  async function saveDev(data) {
     const response = await api.post('/devs', data);
     setDevs([...devs, response.data]);
   }
+
+  async function destroyDev(dev){
+    const response = await api.delete(`/del/${dev}`);
+  };
 
   return (
     <div id="app">
       <aside>
         <strong>Cadastrar</strong>
-        <DevForm onSubmit={handleSubmit}></DevForm>
+        <DevForm saveDev={saveDev}></DevForm>
       </aside>
 
       <main>
         
         <ul>
           {devs.map(dev => (
-            <DevItem key={dev._id} dev={dev}></DevItem>
+            <DevItem key={dev._id} dev={dev} destroyDev={destroyDev}></DevItem>
           ))}
         </ul>
 

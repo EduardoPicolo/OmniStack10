@@ -2,7 +2,11 @@ import React from 'react';
 
 import './styles.css';
 
-function DevItem({ dev }){
+function DevItem({ dev, destroyDev }){
+
+    async function deleteDev(){
+        await destroyDev(dev.github_username);
+    }
     return (
         <li className="dev-item">
             <header>
@@ -14,6 +18,7 @@ function DevItem({ dev }){
             </header>
             <p>{dev.bio}</p>
             <a href={`https://github.com/${dev.github_username}`} >Acessar perfil no Github</a>
+            <button onClick={deleteDev}>Delete</button>
         </li>
     );
 };
