@@ -6,7 +6,7 @@ module.exports = {
     async index(request, response){
         const devs = await Dev.find();
 
-        return response.json({ devs });
+        return response.json(devs);
     },
 
     async store(request, response) {
@@ -35,6 +35,7 @@ module.exports = {
                 techs: techsArray,
                 location,
             });
+            // return response.json(dev);
         }
         return response.json(dev);
     },
@@ -59,7 +60,7 @@ module.exports = {
     },
 
     async destroy(request, response) {
-        const { github_username } = request.query;
+        const { github_username } = request.params;
 
         // const dev = await Dev.findOne({
         //     github_username,
