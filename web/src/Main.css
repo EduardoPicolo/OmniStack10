@@ -1,10 +1,10 @@
 main {
-    /* flex: 1; */
+    flex: 1;
 }
 
 main ul {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     list-style: none;
 }
@@ -20,6 +20,8 @@ li.dev-item {
     box-shadow:  0 0 14px 0 rgba(0, 0, 0, 0.02);
     border-radius: 2px;
     padding: 20px;
+    /* white-space:normal; */
+    word-break: break-all;
 }
 
 li.dev-item header { 
@@ -44,7 +46,7 @@ li.dev-item header .user-info {
     margin-top: 2px;
 }
 
-li.dev-item img {
+li.dev-item header img {
     width: 54px;
     height: 54px;
     border-radius: 50%;
