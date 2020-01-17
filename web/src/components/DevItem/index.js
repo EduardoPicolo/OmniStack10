@@ -15,10 +15,12 @@ function DevItem({ dev, destroyDev }){
                     <strong>{dev.name}</strong>
                     <span>{dev.techs.join(', ')}</span>
                 </div>
+                <button id="deleteButton" onClick={deleteDev}>X</button>
             </header>
             <p>{dev.bio}</p>
-            <a href={`https://github.com/${dev.github_username}`} >Acessar perfil no Github</a>
-            <button onClick={deleteDev}>Delete</button>
+            <div className="dev-link">
+                <a href={`https://github.com/${dev.github_username}`} >Acessar perfil no Github</a>
+            </div>
         </li>
     );
 };

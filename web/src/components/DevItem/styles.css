@@ -3,7 +3,6 @@ li.dev-item {
     box-shadow:  0 0 14px 0 rgba(0, 0, 0, 0.02);
     border-radius: 2px;
     padding: 20px;
-    /* white-space:normal; */
     word-break: break-all;
 }
 
@@ -53,14 +52,23 @@ li.dev-item a:hover {
 }
 
 li.dev-item button {
-    width: 20%;
-    border: 0;
-    background: #be2525;
-    border-radius: 2px;
-    padding: 3px 3px;
-    font-size: 13px;
+    width: 19px;
+    height: 19px;
+    font-size: 11px;
     font-weight: bold;
-    color: #fff;
+    color: white;
+    border-radius: 50%;
+    margin-left: auto;
+    align-self: flex-start;
+    border: 0;
+    background: #d61414;
     cursor: pointer;
-    transition: background 0.4s;
+    transition: 0.2s;
+}
+
+li.dev-item button:hover {
+    transform: scale(1.1);
+    opacity: 100%;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.575);
+    background: rgb(255, 0, 0);
 }
