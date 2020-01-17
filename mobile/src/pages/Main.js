@@ -8,6 +8,7 @@ import api from '../services/api';
 
 function Main({ navigation }) {
   const [devs, setDevs] = useState([]);
+  const [techs, setTechs] = useState('');
   const [currentRegion, setCurrentRegion] = useState(null);
 
   //Localizar usuario
@@ -40,7 +41,7 @@ function Main({ navigation }) {
       params: {
         latitude,
         longitude,
-        techs: 'ReactJS',
+        techs,
       }
     });
     setDevs(response.data);
@@ -91,6 +92,7 @@ function Main({ navigation }) {
           placeholderTextColor="#999"
           autoCapitalize="words"
           autoCorrect={false}
+          onChangeText={setTechs}
         />
 
         <TouchableOpacity onPress={loadDevs} style={styles.loadButton}>
