@@ -12,22 +12,27 @@ import DevForm from './components/DevForm';
 function App() {
   const [devs, setDevs] = useState([]);
 
-  useEffect(() => {
-    async function loadDevs(){
-      const response = await api.get('/devs');
+  async function loadDevs(){
+    const response = await api.get('/devs');
+    if(response){
       setDevs(response.data);
     }
-
+  }
+  useEffect(() => {
     loadDevs();
   }, []);
-
+ 
   async function saveDev(data) {
     const response = await api.post('/devs', data);
-    setDevs([...devs, response.data]);
+    if(response){
+      // setDevs([...devs, response.data]);
+      loadDevs();
+    }
   }
 
   async function destroyDev(dev){
-    const response = await api.delete(`/del/${dev}`);
+    await api.delete(`/del/${dev}`);
+    loadDevs();
   };
 
   return (

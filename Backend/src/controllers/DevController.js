@@ -35,9 +35,10 @@ module.exports = {
                 techs: techsArray,
                 location,
             });
-            // return response.json(dev);
+            return response.json(dev);
         }
-        return response.json(dev);
+        return response.json({ });
+        // return response.end();
     },
 
     async update(request, response) {
@@ -66,11 +67,12 @@ module.exports = {
         //     github_username,
         // });
 
-        const dev = await Dev.findOneAndDelete({
+        await Dev.deleteOne({
             github_username,
         });
 
-        return response.json({ dev });
+        // return response.json(dev);
+        return response.end();
     },
 
 };
